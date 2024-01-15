@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        {% for discount in discounts %}
+                posted by {{discount.user}} at {{discount.created}}
+                <a href={{discount.link}}>{{discount.title}}</a><br>
+                price ${{discount.price}}, ${{discount.og_price}}<br>
+                {{discount.description}}<br>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul>
+    {% for discount in discounts %}
+        <li>
+            {{discount.title}}<br>
+            ${{discount.price}}, ${{discount.og_price}}<br>
+            {{discount.description}}<br>
+            
+
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
