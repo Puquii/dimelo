@@ -19,3 +19,7 @@ def submit(request):
     else:
         form = CreatePost()
     return render(request, 'posts/create_post.html', {'form': form})
+
+def description(request, slug=None):
+    description = Posts.objects.get(id = slug)
+    return render(request, 'posts/post_desc.html', {'description': description})
