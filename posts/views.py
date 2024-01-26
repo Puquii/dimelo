@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreatePost
 from .models import Posts
 # Create your views here.
@@ -20,6 +20,18 @@ def submit(request):
         form = CreatePost()
     return render(request, 'posts/create_post.html', {'form': form})
 
-def description(request, slug=None):
-    description = Posts.objects.get(id = slug)
+def edit(request, slug):
+    post = get_object_or_404(Posts, slug=slug)
+    if request.method == 'POST':
+        form = CreatePost(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('userinfo')
+    else:
+        form = CreatePost(instance=post)
+    
+    return render(request, 'posts/edit_post.html', {'form': form, 'post': post})
+
+def description(request, slug):
+    description = Posts.objects.get(slug = slug)
     return render(request, 'posts/post_desc.html', {'description': description})
