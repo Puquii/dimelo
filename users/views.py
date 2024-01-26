@@ -32,6 +32,7 @@ def user_login(request):
         form = LoginForm()
     return render(request, "users/login.html", {'form': form})
 
+@login_required
 def changePassword(request):
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
@@ -46,6 +47,8 @@ def changePassword(request):
 def user_info(request):
     passwordChange = PasswordChangeForm(user=request.user, data = request.POST)
     posts = Posts.objects.all().filter(user = request.user)
+    if request.method == 'POST':
+        return redirect('post_edit')
     return render(request, 'users/userinfo.html', {'posts': posts, 'passwordChange' : passwordChange})
 
 def user_logout(request):
