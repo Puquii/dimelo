@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ request.user.username }}</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="scripts.js">
+    <title>{{ request.user.username }}'profile</title>
 </head>
 <body>
     <a href="{% url 'changepassword' %}">Change Password</a>
-    {{request.user.username}}
-    <form method="POST">
-        {{ passwordChange.as_p }}
-    <button type="submit">Change password</button>
+    your posts
     </form>
     <ul>
         {% for post in posts %}
         <li>
-            {{post.title}}
+            {{post.title}} <a href="{% url 'post_edit' slug=post.slug %}">edit post</a>
         </li>
         {% endfor %}
     </ul>
